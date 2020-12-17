@@ -1,5 +1,6 @@
 package za.co.iherridge0.jpa.hibernate.springjpahibernate.repository;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
@@ -24,6 +26,13 @@ class CourseRepositoryTest {
 		Course course = repository.findById(10001L);
 		log.info("{}", course.toString());
 		assertTrue(course.getName().equals("JPA in 50 Steps"));
+	}
+
+	@Test
+	@DirtiesContext
+	void deleteById_basic() {
+		repository.deleteById(10002L);
+		assertNull(repository.findById(10002L));
 	}
 
 }
