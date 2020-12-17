@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
@@ -31,6 +32,7 @@ class StudentRepositoryTest {
 
 	@Test
 	@DirtiesContext
+	@Transactional
 	void retrieveStudentAndPassport() {
 		Student student = em.find(Student.class, 20001L);
 		log.info("student -> {}", student);
