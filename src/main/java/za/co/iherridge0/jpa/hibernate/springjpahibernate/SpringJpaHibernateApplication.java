@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.CourseRepository;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.StudentRepository;
 
 @SpringBootApplication
 public class SpringJpaHibernateApplication implements CommandLineRunner {
@@ -15,7 +16,10 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	CourseRepository repository;
+	CourseRepository courseRepository;
+
+	@Autowired
+	StudentRepository studentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJpaHibernateApplication.class, args);
@@ -23,7 +27,8 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.playWithEntityManager();
+		// courseRepository.playWithEntityManager();
+		studentRepository.saveStudentWithPassport();
 	}
 
 }

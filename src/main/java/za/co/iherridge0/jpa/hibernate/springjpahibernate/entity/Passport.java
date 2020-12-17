@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Passport {
@@ -15,9 +14,6 @@ public class Passport {
 
 	@Column(nullable = false)
 	private String number;
-
-	@OneToOne
-	private Student student;
 
 	protected Passport() {
 
@@ -36,13 +32,17 @@ public class Passport {
 		this.number = number;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Passport [number=" + number + "]";
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 }
