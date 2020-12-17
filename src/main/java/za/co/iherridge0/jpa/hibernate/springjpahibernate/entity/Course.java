@@ -35,4 +35,8 @@ public class Course {
 		return "Course [name=" + name + "]";
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 }

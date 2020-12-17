@@ -25,6 +25,8 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Course course = repository.findById(10001L);
 		log.info("{}", course.toString());
+
+		repository.save(new Course("Microservices in 100 steps"));
 	}
 
 }
