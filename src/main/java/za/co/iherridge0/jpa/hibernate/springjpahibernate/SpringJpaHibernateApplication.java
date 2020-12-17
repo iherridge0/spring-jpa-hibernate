@@ -7,13 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.CourseRepository;
 
 @SpringBootApplication
 public class SpringJpaHibernateApplication implements CommandLineRunner {
 
 	Logger log = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	CourseRepository repository;
 
@@ -23,10 +23,7 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Course course = repository.findById(10001L);
-		log.info("{}", course.toString());
-
-		repository.save(new Course("Microservices in 100 steps"));
+		repository.playWithEntityManager();
 	}
 
 }
