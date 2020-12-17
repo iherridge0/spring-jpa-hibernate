@@ -29,7 +29,9 @@ class CourseRepositoryTest {
 	}
 
 	@Test
-	@DirtiesContext
+	@DirtiesContext // ensures that data changed during test is rolled back to initual state. so if
+					// other tests might use the same data, they would not fail due to other tests
+					// using the same data
 	void deleteById_basic() {
 		repository.deleteById(10002L);
 		assertNull(repository.findById(10002L));

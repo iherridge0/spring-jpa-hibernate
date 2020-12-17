@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Passport;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
 
 @SpringBootTest(classes = SpringJpaHibernateApplication.class)
@@ -36,6 +37,14 @@ class StudentRepositoryTest {
 		Student student = em.find(Student.class, 20001L);
 		log.info("student -> {}", student);
 		log.info("passport -> {}", student.getPassport());
+	}
+
+	@Test
+	@Transactional // Persistance context
+	void retrievePassportAndAssociatedStudent() {
+		Passport passport = em.find(Passport.class, 40001L);
+		log.info("passport -> {}", passport);
+		log.info("student -> {}", passport.getStudent());
 	}
 
 	@Test
