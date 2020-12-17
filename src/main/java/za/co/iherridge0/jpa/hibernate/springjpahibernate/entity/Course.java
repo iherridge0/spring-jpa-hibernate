@@ -1,5 +1,6 @@
 package za.co.iherridge0.jpa.hibernate.springjpahibernate.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ public class Course {
 	@GeneratedValue
 	private Long id;
 
+	@Column(nullable = false)
 	private String name;
 
 	protected Course() {
