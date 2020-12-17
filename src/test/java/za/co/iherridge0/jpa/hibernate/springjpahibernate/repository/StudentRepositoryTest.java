@@ -31,12 +31,16 @@ class StudentRepositoryTest {
 	}
 
 	@Test
-	@DirtiesContext
-	@Transactional
+	@Transactional // Persistance context
 	void retrieveStudentAndPassport() {
 		Student student = em.find(Student.class, 20001L);
 		log.info("student -> {}", student);
 		log.info("passport -> {}", student.getPassport());
+	}
+
+	@Test
+	void someOperationToUnderstandPersistenceContext() {
+		repository.someOperationToUnderstandPersistenceContext();
 	}
 
 }
