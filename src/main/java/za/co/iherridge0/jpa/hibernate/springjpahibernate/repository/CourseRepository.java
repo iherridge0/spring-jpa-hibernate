@@ -42,6 +42,8 @@ public class CourseRepository {
 		em.persist(course);
 		Course course2 = new Course("course2 - Web Services in 100 steps");
 		em.persist(course2);
+		Course course3 = new Course("course3 - Web Services in 100 steps");
+		em.persist(course3);
 
 		em.flush();
 
@@ -51,6 +53,11 @@ public class CourseRepository {
 		em.flush();
 
 		course2.setName("course2 - Web Services in 100 steps - updated");
+		em.flush();
+
+		course3.setName("course3 - Web Services in 100 steps - updated");
+
+		em.refresh(course3); // all changed made on course 3 since persist will be reversed
 		em.flush();
 	}
 }
