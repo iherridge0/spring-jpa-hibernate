@@ -44,4 +44,18 @@ class JPQLTest {
 		log.info("Select c From Course c -> {}", resultList);
 	}
 
+	@Test
+	void jpql_basic_named_query() {
+		Query query = em.createNamedQuery("query_get_all_courses");
+		List resultList = query.getResultList();
+		log.info("Named Query: query_get_all_courses -> {}", resultList);
+	}
+
+	@Test
+	void jpql_where_named_query() {
+		TypedQuery<Course> query = em.createNamedQuery("query_where_clause", Course.class);
+		List<Course> resultList = query.getResultList();
+		log.info("Named Query: query_where_clause -> {}", resultList);
+	}
+
 }
