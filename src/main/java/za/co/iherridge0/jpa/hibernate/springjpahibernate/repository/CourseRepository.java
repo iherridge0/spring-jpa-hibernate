@@ -57,7 +57,9 @@ public class CourseRepository {
 
 		course3.setName("course3 - Web Services in 100 steps - updated");
 
-		em.refresh(course3); // all changed made on course 3 since persist will be reversed
+		// all changed made on course 3 since last flush for this object will not be
+		// persisted
+		em.refresh(course3);
 		em.flush();
 	}
 }
