@@ -2,8 +2,10 @@ package za.co.iherridge0.jpa.hibernate.springjpahibernate.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Passport {
@@ -14,6 +16,9 @@ public class Passport {
 
 	@Column(nullable = false)
 	private String number;
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+	private Student student;
 
 	protected Passport() {
 
@@ -38,6 +43,14 @@ public class Passport {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	@Override

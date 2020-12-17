@@ -48,6 +48,9 @@ public class StudentRepository {
 
 	}
 
+	// EntityManager & Persistence Context
+	// Transaction
+	// session = persistence context
 	public void someOperationToUnderstandPersistenceContext() {
 		// Database Operation 1 - Retrieve student
 		Student student = em.find(Student.class, 20001L);
