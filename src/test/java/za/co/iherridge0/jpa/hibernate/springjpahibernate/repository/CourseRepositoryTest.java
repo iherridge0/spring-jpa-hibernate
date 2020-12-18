@@ -3,15 +3,19 @@ package za.co.iherridge0.jpa.hibernate.springjpahibernate.repository;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Review;
 
 @SpringBootTest(classes = SpringJpaHibernateApplication.class)
 class CourseRepositoryTest {
@@ -20,6 +24,9 @@ class CourseRepositoryTest {
 
 	@Autowired
 	CourseRepository repository;
+
+	@Autowired
+	EntityManager em;
 
 	@Test
 	void findById_basic() {
@@ -57,6 +64,20 @@ class CourseRepositoryTest {
 	@DirtiesContext
 	void playWithEntityManager() {
 		repository.playWithEntityManager();
+	}
+
+	@Test
+	@Transactional
+	void retrieveReviewsForCourse() {
+		Course course = repository.findById(10001L);
+		log.info("retrieveReviewsForCourse {}", course.getReviews());
+	}
+
+	@Test
+	@Transactional
+	void retrieveCourseForReview() {
+		Review review = em.find(Review.class, 50001L);
+		log.info("retrieveCourseForReview {}", review.getCourse());
 	}
 
 }

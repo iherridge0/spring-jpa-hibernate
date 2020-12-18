@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -36,7 +35,7 @@ public class Course {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+	@OneToMany(mappedBy = "course") // by default always lazy fetching
 	private List<Review> reviews = new ArrayList<>();
 
 	protected Course() {
