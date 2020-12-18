@@ -1,14 +1,13 @@
 package za.co.iherridge0.jpa.hibernate.springjpahibernate.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "EmployeeType")
 public abstract class Employee {
 
