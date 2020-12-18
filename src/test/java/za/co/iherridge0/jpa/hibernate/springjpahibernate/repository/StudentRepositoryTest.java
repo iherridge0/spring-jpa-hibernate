@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Passport;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
 
@@ -50,6 +51,22 @@ class StudentRepositoryTest {
 	@Test
 	void someOperationToUnderstandPersistenceContext() {
 		repository.someOperationToUnderstandPersistenceContext();
+	}
+
+	@Test
+	@Transactional
+	void retrieveStudentAndCourses() {
+		Student student = repository.findById(20001L);
+		log.info("student -> {}", student);
+		log.info("student courses -> {}", student.getCourses());
+	}
+
+	@Test
+	@Transactional
+	void retrieveCourseAndStudents() {
+		Course course = em.find(Course.class, 10001L);
+		log.info("course -> {}", course);
+		log.info("course students -> {}", course.getStudents());
 	}
 
 }
