@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Employee;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 
 @Repository
 @Transactional
@@ -34,8 +36,12 @@ public class EmployeeRepository {
 		em.remove(employee);
 	}
 
-	public List<Employee> retrieveAllEmployees() {
-		return em.createNamedQuery("Select e From Employee e", Employee.class).getResultList();
+	public List<PartTimeEmployee> retrieveAllPartTimeEmployees() {
+		return em.createQuery("Select e From PartTimeEmployee e", PartTimeEmployee.class).getResultList();
+	}
+
+	public List<FullTimeEmployee> retrieveFullPartTimeEmployees() {
+		return em.createQuery("Select e From FullTimeEmployee e", FullTimeEmployee.class).getResultList();
 	}
 
 }

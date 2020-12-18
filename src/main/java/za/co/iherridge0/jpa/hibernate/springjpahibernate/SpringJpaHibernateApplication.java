@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Employee;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.CourseRepository;
@@ -49,10 +48,11 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 		// studentRepository.insertStudentAndCourse(new Student("Jennifer"), new
 		// Course("Microservices in 100 Steps"));
 
-		FullTimeEmployee fullTimeEmployee = new FullTimeEmployee("Jack", new BigDecimal(10000));
-		Employee partTimeEmployee = new PartTimeEmployee("Jill", new BigDecimal(50));
-		employeeRepository.insert(fullTimeEmployee);
-		employeeRepository.insert(partTimeEmployee);
+		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
+		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
+
+		log.info("All PartTimeEmployee -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+		log.info("All FullTimeEmployee -> {}", employeeRepository.retrieveFullPartTimeEmployees());
 
 	}
 
