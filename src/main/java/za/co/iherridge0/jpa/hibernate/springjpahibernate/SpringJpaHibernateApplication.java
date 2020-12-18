@@ -50,10 +50,10 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 
 		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
 		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
+		employeeRepository.insert(new PartTimeEmployee("Jane", new BigDecimal(20)));
 
 		log.info("All PartTimeEmployee -> {}", employeeRepository.retrieveAllPartTimeEmployees());
 		log.info("All FullTimeEmployee -> {}", employeeRepository.retrieveFullPartTimeEmployees());
-
 	}
 
 }
