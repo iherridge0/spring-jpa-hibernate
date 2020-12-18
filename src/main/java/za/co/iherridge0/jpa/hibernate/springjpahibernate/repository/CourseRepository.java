@@ -1,5 +1,7 @@
 package za.co.iherridge0.jpa.hibernate.springjpahibernate.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
@@ -64,5 +66,17 @@ public class CourseRepository {
 		// save to database
 		em.persist(review);
 
+	}
+
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+		Course course = findById(courseId);
+
+		log.info("course.getReviews() -> {}", course.getReviews());
+
+		for (Review review : reviews) {
+			course.addReview(review);
+			review.setCourse(course);
+			em.persist(review);
+		}
 	}
 }
