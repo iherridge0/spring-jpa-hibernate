@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Passport;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
 
@@ -67,5 +68,29 @@ public class StudentRepository {
 		// Database Operation 4 - update student
 		student.setName("Ranga - updated");
 		// Persistence Context (student++ , passport++)
+	}
+
+	public void insertHardcodedStudentAndCourse() {
+		Student student = new Student("Jennifer");
+		Course course = new Course("Microservices in 100 Steps");
+		em.persist(student);
+		em.persist(course);
+
+		student.addCourse(course);
+		course.addStudent(student);
+
+		em.persist(student);
+
+	}
+
+	public void insertStudentAndCourse(Student student, Course course) {
+		em.persist(student);
+		em.persist(course);
+
+		student.addCourse(course);
+		course.addStudent(student);
+
+		em.persist(student);
+
 	}
 }
