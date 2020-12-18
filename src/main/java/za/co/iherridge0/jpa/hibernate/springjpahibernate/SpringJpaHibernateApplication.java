@@ -1,7 +1,5 @@
 package za.co.iherridge0.jpa.hibernate.springjpahibernate;
 
-import java.math.BigDecimal;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.FullTimeEmployee;
-import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.PartTimeEmployee;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.CourseRepository;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.EmployeeRepository;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.repository.StudentRepository;
@@ -48,12 +44,17 @@ public class SpringJpaHibernateApplication implements CommandLineRunner {
 		// studentRepository.insertStudentAndCourse(new Student("Jennifer"), new
 		// Course("Microservices in 100 Steps"));
 
-		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
-		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
-		employeeRepository.insert(new PartTimeEmployee("Jane", new BigDecimal(20)));
-
-		log.info("All PartTimeEmployee -> {}", employeeRepository.retrieveAllPartTimeEmployees());
-		log.info("All FullTimeEmployee -> {}", employeeRepository.retrieveFullPartTimeEmployees());
+		/*
+		 * employeeRepository.insert(new FullTimeEmployee("Jack", new
+		 * BigDecimal(10000))); employeeRepository.insert(new PartTimeEmployee("Jill",
+		 * new BigDecimal(50))); employeeRepository.insert(new PartTimeEmployee("Jane",
+		 * new BigDecimal(20)));
+		 * 
+		 * log.info("All PartTimeEmployee -> {}",
+		 * employeeRepository.retrieveAllPartTimeEmployees());
+		 * log.info("All FullTimeEmployee -> {}",
+		 * employeeRepository.retrieveFullPartTimeEmployees());
+		 */
 	}
 
 }

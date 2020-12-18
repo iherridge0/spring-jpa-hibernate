@@ -16,7 +16,7 @@ import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateAppli
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 
 @SpringBootTest(classes = SpringJpaHibernateApplication.class)
-class JPQLTest {
+public class JPQLTest {
 
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -24,38 +24,48 @@ class JPQLTest {
 	EntityManager em;
 
 	@Test
-	void jpql_basic() {
+	public void jpql_basic() {
 		Query query = em.createQuery("Select c From Course c");
 		List resultList = query.getResultList();
 		log.info("Select c From Course c -> {}", resultList);
 	}
 
 	@Test
-	void jpql_typed() {
+	public void jpql_typed() {
 		TypedQuery<Course> query = em.createQuery("Select c From Course c", Course.class);
 		List<Course> resultList = query.getResultList();
 		log.info("Select c From Course c -> {}", resultList);
 	}
 
 	@Test
-	void jpql_where() {
+	public void jpql_where() {
 		TypedQuery<Course> query = em.createQuery("Select c From Course c where name like '%100 Steps'", Course.class);
 		List<Course> resultList = query.getResultList();
 		log.info("Select c From Course c -> {}", resultList);
 	}
 
 	@Test
-	void jpql_basic_named_query() {
+	public void jpql_basic_named_query() {
 		Query query = em.createNamedQuery("query_get_all_courses");
 		List resultList = query.getResultList();
 		log.info("Named Query: query_get_all_courses -> {}", resultList);
 	}
 
 	@Test
-	void jpql_where_named_query() {
+	public void jpql_where_named_query() {
 		TypedQuery<Course> query = em.createNamedQuery("query_where_clause", Course.class);
 		List<Course> resultList = query.getResultList();
 		log.info("Named Query: query_where_clause -> {}", resultList);
+	}
+
+	@Test
+	public void jpql_courses_without_students() {
+
+		TypedQuery<Course> createQuery = em.createQuery("Select c From Course c where c.students is empty",
+				Course.class);
+		List<Course> list = createQuery.getResultList();
+		log.info("jpql_courses_without_students -> {}", list);
+
 	}
 
 }
