@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Review;
 
 @Repository
 @Transactional
@@ -43,6 +44,25 @@ public class CourseRepository {
 
 		Course course2 = findById(10001L);
 		course2.setName("JPA in 50 Steps - Updated");
+
+	}
+
+	public void addReviewsForCourse() {
+		// get the course 10003
+		Course course = findById(10003L);
+
+		log.info("course.getReviews() -> {}", course.getReviews());
+
+		Review review = new Review("Befok!", "5");
+
+		// Setting the relationship
+		course.addReview(review);
+		review.setCourse(course);
+
+		log.info("course.getReviews() -> {}", course.getReviews());
+
+		// save to database
+		em.persist(review);
 
 	}
 }
