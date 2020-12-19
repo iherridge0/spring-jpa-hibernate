@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
 
 @SpringBootTest(classes = SpringJpaHibernateApplication.class)
 public class JPQLTest {
@@ -85,6 +86,16 @@ public class JPQLTest {
 				Course.class);
 		List<Course> list = createQuery.getResultList();
 		log.info("jpql_courses_ordered_by_students -> {}", list);
+
+	}
+
+	@Test
+	public void jpql_students_with_passports_in_a_certain_pattern() {
+
+		TypedQuery<Student> createQuery = em.createQuery("Select s From Student s Where s.passport.number like '%123%'",
+				Student.class);
+		List<Student> list = createQuery.getResultList();
+		log.info("jpql_students_with_passports_in_a_certain_pattern -> {}", list);
 
 	}
 

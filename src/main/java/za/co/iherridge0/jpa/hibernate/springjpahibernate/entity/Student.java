@@ -78,7 +78,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [name=" + name + ", passport=" + passport + "]";
+		return "Student [name=" + name + "]";
 	}
 
 }

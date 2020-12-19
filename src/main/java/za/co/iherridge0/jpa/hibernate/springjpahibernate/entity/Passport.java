@@ -2,7 +2,6 @@ package za.co.iherridge0.jpa.hibernate.springjpahibernate.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -17,7 +16,7 @@ public class Passport {
 	@Column(nullable = false)
 	private String number;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+	@OneToOne(mappedBy = "passport")
 	private Student student;
 
 	protected Passport() {
