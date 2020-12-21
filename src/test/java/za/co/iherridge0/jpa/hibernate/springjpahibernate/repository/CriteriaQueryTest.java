@@ -55,4 +55,9 @@ public class CriteriaQueryTest {
 		 */
 	}
 
+	@Test
+	public void test() {
+
+	}
+
 }
