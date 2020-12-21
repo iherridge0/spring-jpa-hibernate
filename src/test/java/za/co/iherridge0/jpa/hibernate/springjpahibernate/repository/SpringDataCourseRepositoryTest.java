@@ -3,6 +3,7 @@ package za.co.iherridge0.jpa.hibernate.springjpahibernate.repository;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -83,5 +84,13 @@ class SpringDataCourseRepositoryTest {
 		Page<Course> secondPage = repository.findAll(secondPageable);
 
 		log.info("Second Page Content -> {} ", secondPage.getContent());
+	}
+
+	@Test
+	void findByName() {
+
+		List<Course> findByName = repository.findByName("JPA in 50 Steps");
+		log.info("findByName -> {} ", findByName);
+
 	}
 }
