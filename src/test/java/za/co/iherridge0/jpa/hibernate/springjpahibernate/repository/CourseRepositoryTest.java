@@ -81,4 +81,16 @@ class CourseRepositoryTest {
 		log.info("retrieveCourseForReview {}", review.getCourse());
 	}
 
+	@Test
+	@Transactional // If removed, then two select queries will be fired, each
+	// findById call would
+	// provide their own transaction
+	void findById_firstLevelCacheDemo() {
+		Course course = repository.findById(10001L); // SELECT performed
+		log.info("First Retrieve {}", course);
+
+		Course course2 = repository.findById(10001L); // Retrieved from Cache
+		log.info("Second Retrieve {}", course2);
+	}
+
 }
