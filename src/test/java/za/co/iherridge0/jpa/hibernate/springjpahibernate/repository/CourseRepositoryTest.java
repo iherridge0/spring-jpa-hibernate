@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
@@ -74,7 +75,7 @@ class CourseRepositoryTest {
 	}
 
 	@Test
-	@Transactional
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	void retrieveCourseForReview() {
 		Review review = em.find(Review.class, 50001L);
 		log.info("retrieveCourseForReview {}", review.getCourse());
