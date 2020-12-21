@@ -97,6 +97,70 @@ public class JPQLTest {
 		List<Student> list = createQuery.getResultList();
 		log.info("jpql_students_with_passports_in_a_certain_pattern -> {}", list);
 
+		// like
+		// BETWEEEN 100 and 1000
+		// IS NULL
+		// upper, lower, trim, lenght
+
+	}
+
+	// JOIN => Select c, s from Course c JOIN c.students s
+	// -> If there are courses without students the JOIN will not return those
+	// courses
+	@Test
+	public void join() {
+		Query createQuery = em.createQuery("Select c, s from Course c JOIN c.students s");
+		List<Object[]> resultList = createQuery.getResultList();
+		log.info("join result size -> {}", resultList.size());
+
+		for (Object[] result : resultList) {
+			log.info("{} {}", result[0], result[1]);
+		}
+		// join result size -> 4
+		// Course [name=JPA in 50 Steps] Student [name=John]
+		// Course [name=JPA in 50 Steps] Student [name=Pieter]
+		// Course [name=JPA in 50 Steps] Student [name=Jackson]
+		// Course [name=JPA in 100 Steps] Student [name=John]
+	}
+
+	// LEFT JOIN => Select c, s from Course c LEFT JOIN c.students s
+	@Test
+	public void left_join() {
+		Query createQuery = em.createQuery("Select c, s from Course c LEFT JOIN c.students s");
+		List<Object[]> resultList = createQuery.getResultList();
+		log.info("left join result size -> {}", resultList.size());
+
+		for (Object[] result : resultList) {
+			log.info("{} {}", result[0], result[1]);
+		}
+		// left join result size -> 5
+		// Course [name=JPA in 50 Steps] Student [name=John]
+		// Course [name=JPA in 50 Steps] Student [name=Pieter]
+		// Course [name=JPA in 50 Steps] Student [name=Jackson]
+		// Course [name=JPA in 86 Steps] null
+		// Course [name=JPA in 100 Steps] Student [name=John]
+	}
+
+	// CROSS JOIN => Select c, s from Course c, Student s
+	@Test
+	public void cross_join() {
+		Query createQuery = em.createQuery("Select c, s from Course c, Student s");
+		List<Object[]> resultList = createQuery.getResultList();
+		log.info("cross join result size -> {}", resultList.size());
+
+		for (Object[] result : resultList) {
+			log.info("{} {}", result[0], result[1]);
+		}
+		// cross join result size -> 9
+		// Course [name=JPA in 50 Steps] Student [name=John]
+		// Course [name=JPA in 50 Steps] Student [name=Pieter]
+		// Course [name=JPA in 50 Steps] Student [name=Jackson]
+		// Course [name=JPA in 86 Steps] Student [name=John]
+		// Course [name=JPA in 86 Steps] Student [name=Pieter]
+		// Course [name=JPA in 86 Steps] Student [name=Jackson]
+		// Course [name=JPA in 100 Steps] Student [name=John]
+		// Course [name=JPA in 100 Steps] Student [name=Pieter]
+		// Course [name=JPA in 100 Steps] Student [name=Jackson]
 	}
 
 }
