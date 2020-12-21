@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //@NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
 @NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
 		@NamedQuery(name = "query_where_clause", query = "Select c From Course c where name like '%100 Steps'") })
-
+@Cacheable
 public class Course {
 
 	@Id
