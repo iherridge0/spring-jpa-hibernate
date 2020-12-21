@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //@NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
 @NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
@@ -40,6 +42,7 @@ public class Course {
 	private List<Review> reviews = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "courses") // so student is the main entity
+	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
 
 	protected Course() {
