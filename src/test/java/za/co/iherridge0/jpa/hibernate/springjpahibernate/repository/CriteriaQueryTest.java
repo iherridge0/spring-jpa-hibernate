@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -59,7 +61,7 @@ public class CriteriaQueryTest {
 	@Test
 	public void all_courses_having_100Steps() {
 		// We want to do the following query:
-		// Select c From Course c
+		// Select c From Course c Where c name like '%100 Steps'
 
 		// 1. Use Criteria Builder to create a Criteria Query returning the expected
 		// result object
@@ -82,16 +84,12 @@ public class CriteriaQueryTest {
 		List<Course> resultList = query.getResultList();
 		log.info("all_courses_having_100Steps -> {}", resultList);
 
-		/*
-		 * OUTPUT Typed Query -> [Course [name=JPA in 50 Steps], Course [name=JPA in 86
-		 * Steps], Course [name=JPA in 100 Steps]]
-		 */
 	}
 
 	@Test
 	public void all_courses_without_students() {
 		// We want to do the following query:
-		// Select c From Course c
+		// Select c From Course c where c.students is empty
 
 		// 1. Use Criteria Builder to create a Criteria Query returning the expected
 		// result object
@@ -108,6 +106,61 @@ public class CriteriaQueryTest {
 
 		// 4. Add Predicates etc to the Criteria Query
 		cq.where(studentsIsEmpty);
+
+		// 5. Build the TypedQuery using the entity manager and criteria query
+		TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+		log.info("all_courses_without_students -> {}", resultList);
+
+	}
+
+	@Test
+	public void join() {
+		// We want to do the following query:
+		// Select c From Course c join c.students s
+
+		// 1. Use Criteria Builder to create a Criteria Query returning the expected
+		// result object
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+		// 2. Define roots for tables which are involved in the query
+		Root<Course> courseRoot = cq.from(Course.class);
+
+		// 3. Define Predicates etc using Criteria Builder
+		Join<Object, Object> join = courseRoot.join("students");
+
+		// 4. Add Predicates etc to the Criteria Query
+
+		// 5. Build the TypedQuery using the entity manager and criteria query
+		TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+		log.info("all_courses_without_students -> {}", resultList);
+
+		/*
+		 * OUTPUT Typed Query -> [Course [name=JPA in 50 Steps], Course [name=JPA in 86
+		 * Steps], Course [name=JPA in 100 Steps]]
+		 */
+	}
+
+	@Test
+	public void left_join() {
+		// We want to do the following query:
+		// Select c From Course c left join c.students s
+
+		// 1. Use Criteria Builder to create a Criteria Query returning the expected
+		// result object
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+		// 2. Define roots for tables which are involved in the query
+		Root<Course> courseRoot = cq.from(Course.class);
+
+		// 3. Define Predicates etc using Criteria Builder
+		Join<Object, Object> join = courseRoot.join("students", JoinType.LEFT);
+
+		// 4. Add Predicates etc to the Criteria Query
 
 		// 5. Build the TypedQuery using the entity manager and criteria query
 		TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
