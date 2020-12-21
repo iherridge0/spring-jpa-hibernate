@@ -25,7 +25,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 //@NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
 @NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
+		@NamedQuery(name = "query_get_all_courses_join_fetch", query = "Select  c  From Course c JOIN FETCH c.students s"),
 		@NamedQuery(name = "query_where_clause", query = "Select c From Course c where name like '%100 Steps'") })
+
 @Cacheable
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
 @Where(clause = "is_deleted = false")
