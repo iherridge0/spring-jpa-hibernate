@@ -5,29 +5,6 @@ values(10002, 'JPA in 86 Steps', sysdate(), sysdate());
 insert into course(id, name, created_date, last_updated_date)
 values(10003, 'JPA in 100 Steps', sysdate(), sysdate());
 insert into course(id, name, created_date, last_updated_date) 
-values(10004, 'Dummy 1', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10005, 'Dummy 2', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10006, 'Dummy 3', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date) 
-values(10007, 'Dummy 4', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10008, 'Dummy 5', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10009, 'Dummy 6', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date) 
-values(10010, 'Dummy 7', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10011, 'Dummy 8', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10012, 'Dummy 9', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date) 
-values(10013, 'Dummy 10', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10014, 'Dummy 11', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date)
-values(10015, 'Dummy 12', sysdate(), sysdate());
 
 insert into passport(id, number)
 values(40001, '1234');
