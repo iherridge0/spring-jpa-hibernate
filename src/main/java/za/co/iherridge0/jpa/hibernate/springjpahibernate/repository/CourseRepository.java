@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Review;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.ReviewRating;
 
 @Repository
 @Transactional
@@ -55,7 +56,7 @@ public class CourseRepository {
 
 		log.info("course.getReviews() -> {}", course.getReviews());
 
-		Review review = new Review("Befok!", "5");
+		Review review = new Review("Befok!", ReviewRating.FIVE);
 
 		// Setting the relationship
 		course.addReview(review);

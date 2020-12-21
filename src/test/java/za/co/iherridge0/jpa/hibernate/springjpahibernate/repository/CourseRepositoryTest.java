@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Review;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.ReviewRating;
 
 @SpringBootTest(classes = SpringJpaHibernateApplication.class)
 class CourseRepositoryTest {
@@ -79,6 +80,14 @@ class CourseRepositoryTest {
 	void retrieveCourseForReview() {
 		Review review = em.find(Review.class, 50001L);
 		log.info("retrieveCourseForReview {}", review.getCourse());
+	}
+
+	@Test
+	@Transactional
+	void addReviewToCourse() {
+		Course course = repository.findById(10001L);
+		course.addReview(new Review("Bananas!", ReviewRating.FIVE));
+		log.info("retrieveCourseForReview {}", course.getReviews());
 	}
 
 	@Test
