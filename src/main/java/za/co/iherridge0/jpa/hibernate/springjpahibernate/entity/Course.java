@@ -15,7 +15,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
 		@NamedQuery(name = "query_where_clause", query = "Select c From Course c where name like '%100 Steps'") })
 @Cacheable
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+@Where(clause = "is_deleted = false")
 public class Course {
 
 	@Id
@@ -45,6 +49,8 @@ public class Course {
 	@ManyToMany(mappedBy = "courses") // so student is the main entity
 	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
+
+	private boolean isDeleted;
 
 	protected Course() {
 
@@ -111,9 +117,17 @@ public class Course {
 		this.students.remove(student);
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	@Override
 	public String toString() {
-		return "Course [name=" + name + "]";
+		return "Course [name=" + name + ", isDeleted=" + isDeleted + "]";
 	}
 
 }
