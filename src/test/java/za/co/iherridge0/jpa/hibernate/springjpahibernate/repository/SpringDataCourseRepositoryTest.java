@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
@@ -40,10 +41,25 @@ class SpringDataCourseRepositoryTest {
 
 	@Test
 	void playingAroundWithSpringDataRepository() {
-		Course course = new Course("Microservices in 100 Steps");
-		repository.save(course);
+		/*
+		 * Course course = new Course("Microservices in 100 Steps");
+		 * repository.save(course);
+		 */
 
 		log.info("Courses -> {} ", repository.findAll());
+		log.info("Courses -> {} ", repository.count());
+
+	}
+
+	@Test
+	void sort() {
+		/*
+		 * Course course = new Course("Microservices in 100 Steps");
+		 * repository.save(course);
+		 */
+
+		Sort sort = Sort.by(Sort.Direction.DESC, "name");
+		log.info("Courses -> {} ", repository.findAll(sort));
 		log.info("Courses -> {} ", repository.count());
 
 	}
