@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
@@ -51,6 +52,11 @@ public class Course {
 	private List<Student> students = new ArrayList<>();
 
 	private boolean isDeleted;
+
+	@PreRemove
+	public void preRemove() {
+		this.isDeleted = true;
+	}
 
 	protected Course() {
 
@@ -115,14 +121,6 @@ public class Course {
 
 	public void removeStudent(Student student) {
 		this.students.remove(student);
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 
 	@Override
