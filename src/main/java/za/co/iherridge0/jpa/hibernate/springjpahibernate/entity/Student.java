@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,17 @@ public class Student {
 
 	@Column(nullable = false)
 	private String name;
+
+	/*
+	 * address is added as part of the student table in the databse when using
+	 * the @embedded annotation
+	 * 
+	 * create table student ( id bigint not null, city varchar(255), line1
+	 * varchar(255), line2 varchar(255), name varchar(255) not null, passport_id
+	 * bigint, primary key (id) )
+	 */
+	@Embedded
+	private Address address;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passport passport;
@@ -78,7 +90,15 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [name=" + name + "]";
+		return "Student [name=" + name + ", address=" + address + ", passport=" + passport + "]";
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }

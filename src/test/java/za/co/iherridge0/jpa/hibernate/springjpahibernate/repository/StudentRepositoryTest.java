@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
+import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Address;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Passport;
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Student;
@@ -30,6 +31,14 @@ class StudentRepositoryTest {
 	@DirtiesContext
 	void saveStudentWithPassport() {
 		repository.saveStudentWithPassport();
+	}
+
+	@Test
+	@Transactional
+	void setAddressDetails() {
+		Student student = em.find(Student.class, 20001L);
+		student.setAddress(new Address("No 1", "Some Street", "Some City"));
+		log.info("student -> {}", student);
 	}
 
 	@Test
