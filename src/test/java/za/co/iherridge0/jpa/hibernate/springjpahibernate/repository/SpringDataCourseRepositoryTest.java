@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import za.co.iherridge0.jpa.hibernate.springjpahibernate.SpringJpaHibernateApplication;
@@ -62,5 +65,23 @@ class SpringDataCourseRepositoryTest {
 		log.info("Courses -> {} ", repository.findAll(sort));
 		log.info("Courses -> {} ", repository.count());
 
+	}
+
+	@Test
+	void pagination() {
+
+		PageRequest pageRequest = PageRequest.of(0, 3);
+		log.info("repository.findAll(pageRequest) -> {} ", repository.findAll(pageRequest));
+		// OUTPUT:
+		// First Page -> Page 1 of 5 containing
+		// za.co.iherridge0.jpa.hibernate.springjpahibernate.entity.Course instances
+
+		Page<Course> firstPage = repository.findAll(pageRequest);
+		log.info("First Page Content -> {} ", firstPage.getContent());
+
+		Pageable secondPageable = firstPage.nextPageable();
+		Page<Course> secondPage = repository.findAll(secondPageable);
+
+		log.info("Second Page Content -> {} ", secondPage.getContent());
 	}
 }
